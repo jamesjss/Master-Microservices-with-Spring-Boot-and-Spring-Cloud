@@ -1,6 +1,8 @@
-package com.jamesjss.rest.webservices.restfullwebservices.user;
+package com.jamesjss.rest.webservices.restfullwebservices.resources;
 
 import com.jamesjss.rest.webservices.restfullwebservices.exception.UserNotFoundException;
+import com.jamesjss.rest.webservices.restfullwebservices.user.User;
+import com.jamesjss.rest.webservices.restfullwebservices.services.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +41,14 @@ public class UserResource {
                 .buildAndExpand(savedUser.getId()).toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id) {
+        User user = service.deleteById(id);
+        if (user==null) {
+            throw new UserNotFoundException("id-"+ id);
+        }
     }
 }
