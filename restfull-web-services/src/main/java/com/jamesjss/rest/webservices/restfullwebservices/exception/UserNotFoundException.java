@@ -1,4 +1,4 @@
-package com.jamesjss.rest.webservices.restfullwebservices.error;
+package com.jamesjss.rest.webservices.restfullwebservices.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

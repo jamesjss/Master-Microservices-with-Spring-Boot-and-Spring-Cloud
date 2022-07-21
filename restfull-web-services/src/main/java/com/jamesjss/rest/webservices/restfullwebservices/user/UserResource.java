@@ -1,6 +1,6 @@
 package com.jamesjss.rest.webservices.restfullwebservices.user;
 
-import com.jamesjss.rest.webservices.restfullwebservices.error.UserNotFoundException;
+import com.jamesjss.rest.webservices.restfullwebservices.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
