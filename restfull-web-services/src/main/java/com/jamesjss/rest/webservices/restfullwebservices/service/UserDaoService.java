@@ -1,6 +1,6 @@
-package com.jamesjss.rest.webservices.restfullwebservices.services;
+package com.jamesjss.rest.webservices.restfullwebservices.service;
 
-import com.jamesjss.rest.webservices.restfullwebservices.user.User;
+import com.jamesjss.rest.webservices.restfullwebservices.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
 package com.jamesjss.rest.webservices.restfullwebservices.exception;
 
-import com.jamesjss.rest.webservices.restfullwebservices.user.User;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +25,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                 .details(request.getDescription(false))
                 .build();
 
-        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
@@ -38,6 +38,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                         .details(request.getDescription(false))
                         .build();
 
-        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ExceptionResponse exceptionResponse =
+                ExceptionResponse.builder()
+                        .timestamp(new Date())
+                        .message(ex.getMessage())
+                        .details(ex.getBindingResult().toString())
+                        .build();
+
+        return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }

@@ -1,13 +1,14 @@
-package com.jamesjss.rest.webservices.restfullwebservices.resources;
+package com.jamesjss.rest.webservices.restfullwebservices.controller;
 
 import com.jamesjss.rest.webservices.restfullwebservices.exception.UserNotFoundException;
-import com.jamesjss.rest.webservices.restfullwebservices.user.User;
-import com.jamesjss.rest.webservices.restfullwebservices.services.UserDaoService;
+import com.jamesjss.rest.webservices.restfullwebservices.model.User;
+import com.jamesjss.rest.webservices.restfullwebservices.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class UserResource {
     }
     
     @PostMapping("/users")
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = service.save(user);
 
         URI location = ServletUriComponentsBuilder
